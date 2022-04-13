@@ -100,11 +100,12 @@
                     app:boxStrokeWidth="1dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:inputType="textPersonName|textEmailAddress"
-                        android:id="@+id/eMail"
+                        android:id="@+id/email"
                         android:ems="10"
                         android:textSize="13sp"
                         android:textColor="@color/black"
@@ -129,7 +130,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:inputType="textPassword"
-                        android:id="@+id/passwords"
+                        android:id="@+id/password"
                         android:ems="10"
                         android:textSize="13sp"
                         android:textColor="@color/black"

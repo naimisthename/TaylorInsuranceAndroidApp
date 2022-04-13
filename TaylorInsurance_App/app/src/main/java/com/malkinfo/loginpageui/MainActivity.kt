@@ -4,10 +4,15 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
@@ -31,7 +36,10 @@ class MainActivity : AppCompatActivity() {
             logIn.setTextColor(resources.getColor(R.color.textColor,null))
         }
         signIn.setOnClickListener {
-            startActivity(Intent(this@MainActivity,NewActivity::class.java))
+
+
+            login()
+//
         }
 
         // get reference to ImageView
@@ -60,6 +68,38 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun login() {
+
+        val customerApi = RetroFitHelper.getInstance().create(CustomerService::class.java)
+        // launching a new coroutine
+        GlobalScope.launch {
+            val customer = customerApi.getCustomers().body()
+            if (customer != null) {
+
+                runOnUiThread {
+
+                    val etEmail=findViewById<TextInputEditText>(R.id.email)
+                    val etPass=findViewById<TextInputEditText>(R.id.password)
+
+
+
+                    if(customer.email.toString().equals(etEmail.text.toString(),true) && customer.id.toString().equals(etPass.text.toString()))
+                    {
+
+                        startActivity(Intent(this@MainActivity,NewActivity::class.java))
+                    }
+                    else
+                    {
+                        Toast.makeText(this@MainActivity,"Email or pass is Wrong",Toast.LENGTH_LONG).show()
+                    }
+
+                }
+
+
+            }
+        }
     }
 }
 

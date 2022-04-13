@@ -24,6 +24,7 @@ class NewActivity : AppCompatActivity() {
         val txtautoPolicy = findViewById<TextView>(R.id.autoPolicy)
         val getaQuote = findViewById<ImageView>(R.id.getaQuote)
 
+
         getaQuote.setOnClickListener {
 
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://10.0.0.245:8080/"))
